@@ -66,7 +66,8 @@ public class MyArrayListTest {
 	@Test
 	public void testAddIntT() {
 		mal.add(1, 5);
-		//System.out.println(Arrays.toString(mal.toArray()));
+		// System.out.println("NORM");
+		// System.out.println(Arrays.toString(mal.toArray()));
 		assertThat(mal.get(1), is(new Integer(5)));
 		assertThat(mal.size(), is(4));
 		
@@ -77,6 +78,8 @@ public class MyArrayListTest {
 
 		try {
 		    mal.set(4, 0);
+		    // System.out.println("HEHRELREHRKAERHA");
+		    // System.out.println(Arrays.toString(mal.toArray()));
 		    fail();
 		} catch (IndexOutOfBoundsException e) {} // good
 		
@@ -195,7 +198,7 @@ public class MyArrayListTest {
 		assertThat(flag, equalTo(true));
 		assertThat(mal.size(), is(1));
 		assertThat(mal.get(0), is(new Integer(3)));
-		//System.out.println(Arrays.toString(mal.toArray()));
+		System.out.println(Arrays.toString(mal.toArray()));
 		
 		flag = mal.remove(new Integer(5));
 		assertThat(flag, equalTo(false));

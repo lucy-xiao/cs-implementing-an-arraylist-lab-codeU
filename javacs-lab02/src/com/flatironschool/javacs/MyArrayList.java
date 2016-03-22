@@ -36,12 +36,20 @@ public class MyArrayList<E> implements List<E> {
 		// run a few simple tests
 		MyArrayList<Integer> mal = new MyArrayList<Integer>();
 		mal.add(1);
+		mal.add(5);
 		mal.add(2);
 		mal.add(3);
 		System.out.println(Arrays.toString(mal.toArray()) + " size = " + mal.size);
 		
-		mal.remove(new Integer(2));
+		// mal.remove(new Integer(2));
+		// System.out.println(Arrays.toString(mal.toArray()) + " size = " + mal.size);
+		// mal.add(3,1);
+		// System.out.println(Arrays.toString(mal.toArray()) + " size = " + mal.size);
+		// mal.remove(3);
+		// System.out.println(Arrays.toString(mal.toArray()) + " size = " + mal.size);
+		mal.set(4,0);
 		System.out.println(Arrays.toString(mal.toArray()) + " size = " + mal.size);
+		// System.out.println(mal.set(4,0));
 	}
 
 	@Override
@@ -62,7 +70,15 @@ public class MyArrayList<E> implements List<E> {
 		if (index < 0 || index > size) {
 			throw new IndexOutOfBoundsException();
 		}
-		// TODO: fill in the rest of this method
+		E[] bigger = (E[]) new Object[array.length+1];
+		System.arraycopy(array, 0, bigger, 0, index);
+		
+		bigger[index] = element;
+		System.arraycopy(array, index, bigger, index+1, array.length-index);
+		array = bigger;
+
+		size += 1;
+
 	}
 
 	@Override
@@ -112,7 +128,12 @@ public class MyArrayList<E> implements List<E> {
 	@Override
 	public int indexOf(Object target) {
 		// TODO: fill in this method
-		return 0;
+		for (int i =0; i< size; i++) {
+			if (equals(target, array[i])) {
+				return i;
+			}
+		}
+		return -1;
 	}
 
 	/** Checks whether an element of the array is the target.
@@ -183,7 +204,16 @@ public class MyArrayList<E> implements List<E> {
 	@Override
 	public E remove(int index) {
 		// TODO: fill in this method.
-		return null;
+		if (index < 0 || index >= size) {
+			throw new IndexOutOfBoundsException();
+		}
+		E[] smaller = (E[]) new Object[array.length-1];
+		System.arraycopy(array, 0, smaller, 0, index);
+		System.arraycopy(array, index+1, smaller, index, array.length-index-1);
+		E obj = array[index];
+		array = smaller;
+		size -= 1;
+		return obj;
 	}
 
 	@Override
@@ -203,7 +233,12 @@ public class MyArrayList<E> implements List<E> {
 	@Override
 	public E set(int index, E element) {
 		// TODO: fill in this method.
-		return null;
+		if (index < 0 || index >= size) {
+			throw new IndexOutOfBoundsException();
+		}
+		E old = array[index];
+		array[index] = element;
+		return old;
 	}
 
 	@Override
